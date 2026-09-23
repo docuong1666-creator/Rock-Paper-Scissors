@@ -39,6 +39,7 @@ let computerScore = 0;
 //  4.4 Log a winner announcement
 
 function playRound(humanChoice, computerChoice) {
+    
     if ( humanChoice === "rock" && computerChoice === "rock" ) {
         console.log(`\n
             You choose ${humanChoice} \n
