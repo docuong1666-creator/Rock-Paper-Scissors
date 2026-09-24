@@ -1,8 +1,5 @@
 // 1.Write a function that randomly return "rock", "paper", "scissors".
-// 1.1 Declare a variable computerChoice
-// 1.2 Assign computerChoice random from 3 number
-// 1.3 Use If...else to return "rock", "paper", "scissors" with
-// each number
+
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3) + 1;
     if ( computerChoice === 1 ) {
@@ -11,16 +8,10 @@ function getComputerChoice() {
         return "paper";
     } else if ( computerChoice === 3 ) {
         return "scissors";
-    } else {
-        return "WOW, Something is wrong, I don't know";
     }
 }
 
-// 2.Write a fucntion that take user's choice and return it.
-// 2.1 Create a new function name getHumanChoice
-// 2.2 getHumanChoice will return one of the valid choice 
-// base on what the user input
-// 2.2.1 Use Prompt to get the user input
+// 2.Write a fucntion that take user's choice and return it as lowerCase.
 
 function getHumanChoice() {
     let humanChoice = prompt("What is your choice ? rock ? paper ? scissors", "");
@@ -31,7 +22,7 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
-// 4.Wrtie the logic to play a single round
+// 4.Write the game logic for a single round
 //  4.1 Write a function that take the computer and player choice
 //      as arguments
 //  4.2 Play a single round
@@ -109,18 +100,21 @@ function playRound(humanChoice, computerChoice) {
             Draw`)
         console.log(`Your Score: ${humanScore}`);
         console.log(`Computer Score: ${computerScore}`);
+    } else {
+        console.log(`\n
+            You choose ${humanChoice} \n
+            Your opponent choose ${computerChoice} \n
+            INVALID!`)
+        console.log(`Your Score: ${humanScore}`);
+        console.log(`Computer Score: ${computerScore}`);
     }
 }
 
 
-
-
-// 5. Write the logic to play the entire game.
-// The game has 5 rounds
-// The score is keep track each round
+// 5. Write the logic to play the entire game ( 5 rounds ).
 
 function playGame() {
-
+    
     for ( let i = 0; i < 5; i++) {
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
