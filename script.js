@@ -1,12 +1,12 @@
 // 1.Write a function that randomly return "rock", "paper", "scissors".
 
 function getComputerChoice() {
-    let computerChoice = Math.floor(Math.random() * 3) + 1;
-    if ( computerChoice === 1 ) {
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    if ( randomNumber === 1 ) {
         return "rock";
-    } else if ( computerChoice === 2 ) {
+    } else if ( randomNumber === 2 ) {
         return "paper";
-    } else if ( computerChoice === 3 ) {
+    } else if ( randomNumber === 3 ) {
         return "scissors";
     }
 }
@@ -19,26 +19,25 @@ function getHumanChoice() {
 }
 
 // 3.Write 2 variables to keep track of the players score.
+
 let humanScore = 0;
 let computerScore = 0;
 
 // 4.Write the game logic for a single round
-//  4.1 Write a function that take the computer and player choice
-//      as arguments
-//  4.2 Play a single round
-//  4.3 Increment the round winner's score
-//  4.4 Log a winner announcement
 
 function playRound(humanChoice, computerChoice) {
     
-    if ( humanChoice === "rock" && computerChoice === "rock" ) {
+    if ( humanChoice === computerChoice ) {
         console.log(`\n
             You choose ${humanChoice} \n
             Your opponent choose ${computerChoice} \n
             Draw`)
         console.log(`Your Score: ${humanScore}`);
         console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "rock" && computerChoice === "paper" ) {
+    } else if ( humanChoice === "rock" && computerChoice === "paper" ||
+                humanChoice === "paper" && computerChoice === "scissors" ||
+                humanChoice === "scissors" && computerChoice === "rock"
+     ) {
         console.log(`\n
             You choose ${humanChoice} \n
             Your opponent choose ${computerChoice} \n
@@ -46,58 +45,15 @@ function playRound(humanChoice, computerChoice) {
         computerScore += 1;
         console.log(`Your Score: ${humanScore}`);
         console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "rock" && computerChoice === "scissors" ) {
+    } else if ( humanChoice === "rock" && computerChoice === "scissors" ||
+                humanChoice === "paper" && computerChoice === "rock" ||
+                humanChoice === "scissors" && computerChoice === "paper"
+     ) {
         console.log(`\n
             You choose ${humanChoice} \n
             Your opponent choose ${computerChoice} \n
             YOU WIN !`)
         humanScore += 1;
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "paper" && computerChoice === "rock" ) {
-        console.log(`\n
-            You choose ${humanChoice} \n
-            Your opponent choose ${computerChoice} \n
-            YOU WIN !`)
-        humanScore += 1;
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "paper" && computerChoice === "paper" ) {
-        console.log(`\n
-            You choose ${humanChoice} \n
-            Your opponent choose ${computerChoice} \n
-            Draw`)
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "paper" && computerChoice === "scissors" ) {
-        console.log(`\n
-            You choose ${humanChoice} \n
-            Your opponent choose ${computerChoice} \n
-            YOU LOSE!`)
-        computerScore += 1;
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "scissors" && computerChoice === "rock" ) {
-        console.log(`\n
-            You choose ${humanChoice} \n
-            Your opponent choose ${computerChoice} \n
-            YOU LOSE!`)
-        computerScore += 1;
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "scissors" && computerChoice === "paper" ) {
-        console.log(`\n
-            You choose ${humanChoice} \n
-            Your opponent choose ${computerChoice} \n
-            YOU WIN!`)
-        humanScore += 1;
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
-    } else if ( humanChoice === "scissors" && computerChoice === "scissors" ) {
-        console.log(`\n
-            You choose ${humanChoice} \n
-            Your opponent choose ${computerChoice} \n
-            Draw`)
         console.log(`Your Score: ${humanScore}`);
         console.log(`Computer Score: ${computerScore}`);
     } else {
