@@ -1,92 +1,105 @@
-// 1.Write a function that randomly return "rock", "paper", "scissors".
+const rockBtn = document.createElement('button');
+const paperBtn = document.createElement('button');
+const scissorsBtn = document.createElement('button');
+const resetBtn = document.createElement('button');
 
-function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random() * 3) + 1;
-    if ( randomNumber === 1 ) {
-        return "rock";
-    } else if ( randomNumber === 2 ) {
-        return "paper";
-    } else if ( randomNumber === 3 ) {
-        return "scissors";
-    }
-}
+rockBtn.textContent = 'Rock';
+paperBtn.textContent = 'Paper';
+scissorsBtn.textContent = 'Scissors';
+resetBtn.textContent ='RESET GAME';
 
-// 2.Write a fucntion that take user's choice and return it as lowerCase.
+document.body.append(rockBtn,paperBtn,scissorsBtn);
 
-function getHumanChoice() {
-    let humanChoice = prompt("What is your choice ? rock ? paper ? scissors", "");
-    return humanChoice.toLowerCase();
-}
+const buttons = document.querySelectorAll('button');
 
-// 3.Write 2 variables to keep track of the players score.
+const div = document.createElement('div');
+div.setAttribute('style', 'white-space: pre; text-align: center');
+document.body.appendChild(div);
+
 
 let humanScore = 0;
 let computerScore = 0;
+let roundCount = 0;
 
-// 4.Write the game logic for a single round
+//  game logic for a single round
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice) {
+    
+    let computerChoice = "";
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    if ( randomNumber === 1 ) {
+        computerChoice = "rock";
+    } else if ( randomNumber === 2 ) {
+        computerChoice = "paper";
+    } else if ( randomNumber === 3 ) {
+        computerChoice = "scissors";
+    }
     
     if ( humanChoice === computerChoice ) {
-        console.log(`\n
+        div.textContent += `\n
             You choose ${humanChoice} \n
             Your opponent choose ${computerChoice} \n
-            Draw`)
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
+            DRAW! \n
+            Your Score: ${humanScore} \n
+            Computer Score: ${computerScore} \n\n\n`
     } else if ( humanChoice === "rock" && computerChoice === "paper" ||
                 humanChoice === "paper" && computerChoice === "scissors" ||
                 humanChoice === "scissors" && computerChoice === "rock"
      ) {
-        console.log(`\n
+        computerScore += 1;
+        div.textContent += `\n
             You choose ${humanChoice} \n
             Your opponent choose ${computerChoice} \n
-            YOU LOSE !`);
-        computerScore += 1;
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
+            YOU LOSE! \n
+            Your Score: ${humanScore} \n
+            Computer Score: ${computerScore} \n\n\n`
     } else if ( humanChoice === "rock" && computerChoice === "scissors" ||
                 humanChoice === "paper" && computerChoice === "rock" ||
                 humanChoice === "scissors" && computerChoice === "paper"
      ) {
-        console.log(`\n
-            You choose ${humanChoice} \n
-            Your opponent choose ${computerChoice} \n
-            YOU WIN !`)
         humanScore += 1;
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
-    } else {
-        console.log(`\n
+        div.textContent += `\n
             You choose ${humanChoice} \n
             Your opponent choose ${computerChoice} \n
-            INVALID!`)
-        console.log(`Your Score: ${humanScore}`);
-        console.log(`Computer Score: ${computerScore}`);
+            YOU WIN! \n
+            Your Score: ${humanScore} \n
+            Computer Score: ${computerScore} \n\n\n`
+    } else {
+        div.textContent += `\n
+            You choose ${humanChoice} \n
+            Your opponent choose ${computerChoice} \n
+            INVALID! \n
+            Your Score: ${humanScore} \n
+            Computer Score: ${computerScore} \n\n\n`
     }
 }
 
 
-// 5. Write the logic to play the entire game ( 5 rounds ).
-
-function playGame() {
+buttons.forEach( button => button.addEventListener('click', (event) => {
+    let humanChoice = event.target.textContent.toLowerCase();
     
-    for ( let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
+    if (humanScore < 5 && computerScore < 5) { 
+        roundCount += 1;
+        div.textContent += `Round: ${roundCount}`     
+        playRound(humanChoice);    
+    } else if (computerScore === 5) {
+        div.textContent += `\n
+            GAME END! \n
+            YOU LOSE THE GAME \n` ;
+        document.body.appendChild(resetBtn);
+    } else if (humanScore === 5) {
+        div.textContent += `\n
+            GAME END! \n
+            YOU WIN THE GAME \n`;
+        document.body.appendChild(resetBtn);
     }
+}))
 
-    if (humanScore > computerScore) {
-        console.log(`\n
-            YOU WIN THE GAME \n`);
-    } else if (humanScore < computerScore) {
-        console.log(`\n
-            YOU LOSE THE GAME \n`);
-    } else if (humanScore === computerScore) {
-        console.log(`\n
-            THE GAME IS A DRAW \n`);
-    }
-}
 
-playGame();
+resetBtn.addEventListener('click', function() {
+    div.textContent = '';
+    humanScore = 0;
+    computerScore = 0;
+    roundCount = 0;
+    resetBtn.remove();
+})
